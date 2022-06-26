@@ -3,8 +3,6 @@ from typing import Callable
 
 from pydantic import BaseModel
 
-from d3.common.api.rpc_handlers import RpcHandlers
-
 
 class RpcSend:
     def __init__(self, api_json_handler: Callable[[str, str], str]):

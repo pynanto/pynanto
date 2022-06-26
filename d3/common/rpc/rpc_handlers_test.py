@@ -1,10 +1,10 @@
 import json
 import unittest
-from functools import partial
 
-from d3.common.api.api_base import ApiBase
-from d3.common.api.api_sum import ApiSumRequest, ApiSumResponse
-from d3.common.api.rpc_handlers import RpcHandlers
+from d3.common.rpc.api_base import ApiBase
+from d3.common.rpc.test_helpers.api_sum import ApiSumRequest, ApiSumResponse
+from d3.common.rpc.rpc_handlers import RpcHandlers
+from d3.common.rpc.test_helpers.bad_api import wrong_handler
 
 
 class MyTestCase(unittest.TestCase):
@@ -37,19 +37,7 @@ class MyTestCase(unittest.TestCase):
         should_be(wrong_6)
 
     def test_wrong_request_definition(self):
-        class ApiBadRequest(ApiBase):
-            ignore: str
-
-        class ApiBadResponse(ApiBase):
-            ignore: str
-
-        # this request is missing
-        # ApiBadRequest.response_class = ApiBadResponse
-
-        def wrong(req: ApiBadRequest) -> ApiBadResponse:
-            pass
-
-        self.register_should_raise(wrong)
+        self.register_should_raise(wrong_handler)
 
     def test_register_and_dispatch(self):
         target = RpcHandlers()

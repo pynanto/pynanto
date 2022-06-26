@@ -3,10 +3,11 @@ from unittest import IsolatedAsyncioTestCase
 
 from pydantic import BaseModel
 
-from d3.common.api.api_base import api_send_set
-from d3.common.api.api_sum import ApiSumRequest, ApiSumResponse
-from d3.common.api.rpc_handlers import RpcHandlers
-from d3.common.api.rpc_transport import RpcSend
+from d3.common.rpc.api_base import api_send_set
+from d3.common.rpc.test_helpers.api_sum import ApiSumRequest, ApiSumResponse
+from d3.common.rpc.rpc_handlers import RpcHandlers
+from d3.common.rpc.rpc_send import RpcSend
+from d3.common.rpc.test_helpers.bad_api import ApiBadRequest
 
 
 class MyTestCase(IsolatedAsyncioTestCase):
@@ -41,6 +42,21 @@ class MyTestCase(IsolatedAsyncioTestCase):
         req = ApiSumRequest(a=39, b=3)
         res: ApiSumResponse = await req.send()
         self.assertEqual(42, res.sum)
+
+    async def test_send_of_wrong_request(self):
+        req = ApiBadRequest(ignore='ignore')
+
+        def send_handler(name: str, json_payload: str) -> str:
+            raise Exception('should not be called')
+
+        sender = RpcSend(send_handler)
+        try:
+            await sender.send(req)
+        except Exception as ex:
+            print(ex)
+            return
+
+        self.fail('No exception!')
 
 
 if __name__ == '__main__':

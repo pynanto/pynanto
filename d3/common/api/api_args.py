@@ -1,7 +1,7 @@
 from datetime import datetime
 from typing import Tuple, Optional, List
 
-from d3.common.api.api_base import ApiBase
+from d3.common.rpc.api_base import ApiBase
 
 
 class ApiSelectionRequest(ApiBase):

@@ -3,7 +3,7 @@ import json
 from dataclasses import dataclass
 from typing import Callable, Dict, Type
 
-from d3.common.api.api_base import ApiBase
+from d3.common.rpc.api_base import ApiBase
 
 AnyApiBase = Type[ApiBase]
 Handler = Callable[[AnyApiBase], AnyApiBase]

@@ -41,11 +41,24 @@ class MyTestCase(unittest.TestCase):
 
     def test_ok(self):
         target = ServerHandlers()
+        request = ApiSumRequest(a=39, b=3)
+        response = ApiSumResponse(sum=42)
 
         def sum_handler(req: ApiSumRequest) -> ApiSumResponse:
-            pass
+            self.assertEqual(req, request)
+            return response
 
         target.register(sum_handler)
+
+        actual = target.dispatch(request)
+
+        self.assertEqual(response, actual)
+
+    def test_no_handler(self):
+        target = ServerHandlers()
+        request = ApiSumRequest(a=39, b=3)
+
+        self.assertRaises(Exception, target.dispatch, request)
 
 
 if __name__ == '__main__':

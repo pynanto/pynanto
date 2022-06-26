@@ -10,3 +10,6 @@ class ApiSelectionRequest(ApiBase):
 
 class ApiSelectionResponse(ApiBase):
     timestamp_values: List[datetime]
+
+
+ApiSelectionRequest.response_type = ApiSelectionResponse

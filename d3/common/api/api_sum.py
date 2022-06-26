@@ -8,3 +8,6 @@ class ApiSumRequest(ApiBase):
 
 class ApiSumResponse(ApiBase):
     sum: int
+
+
+ApiSumRequest.response_type = ApiSumResponse

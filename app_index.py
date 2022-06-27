@@ -1,6 +1,8 @@
 # Browse pyscript virtual filesystem
 
 import os
+import sys
+from pathlib import Path
 
 import js
 from js import document, console, setInterval
@@ -45,5 +47,15 @@ def filesystem_entity(name: str, indent=1):
             children_div.append(c)
     return container
 
+
+folder = (Path().home() / "additional").absolute()
+sys.path.insert(0, str(folder))
+print('sys.path', sys.path)
+
+folder.mkdir(parents=True, exist_ok=True)
+foo = folder / "foo.py"
+foo.write_text("print('I am foo2')")
+
+import foo
 
 document.body.append(filesystem_entity('/'))

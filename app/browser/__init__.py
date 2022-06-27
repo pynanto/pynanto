@@ -1,8 +1,8 @@
 from js import console, fetch
 
-from d3.common.api.api_product import ApiProductRequest, ApiProductResponse
-from d3.common.rpc.api_base import api_send_set
-from d3.common.rpc.rpc_send import RpcSend
+from app.common.api.api_product import ApiProductRequest, ApiProductResponse
+from app.common.rpc.api_base import api_send_set
+from app.common.rpc.rpc_send import RpcSend
 
 print('=' * 10 + ' d3.browser module initialized')
 

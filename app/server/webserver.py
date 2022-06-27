@@ -1,9 +1,7 @@
-from pathlib import Path
-
 from flask import Flask, request, send_file
 
-from d3.server.api_server import rpc_handlers
-from d3.server.client_bundle import build_archive
+from app.server.api_server import rpc_handlers
+from app.server.client_bundle import build_archive
 
 app = Flask(__name__)
 

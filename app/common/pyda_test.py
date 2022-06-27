@@ -1,7 +1,7 @@
 import json
 import unittest
 
-from d3.common.pyda import User, get_user
+from app.common.pyda import User, get_user
 
 
 class MyTestCase(unittest.TestCase):

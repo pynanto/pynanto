@@ -14,7 +14,7 @@ def build_archive() -> Path:
     def fix_arcname(n: str):
         return 'additional' + n.removeprefix(root)
 
-    for dirname, subdirs, files in os.walk(root + '/d3'):
+    for dirname, subdirs, files in os.walk(root + '/app'):
         remove_elements(subdirs, ['__pycache__'])
 
         dir_name = fix_arcname(dirname)

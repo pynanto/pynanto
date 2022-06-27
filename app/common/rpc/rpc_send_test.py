@@ -3,11 +3,11 @@ from unittest import IsolatedAsyncioTestCase
 
 from pydantic import BaseModel
 
-from d3.common.rpc.api_base import api_send_set
-from d3.common.rpc.test_helpers.api_sum import ApiSumRequest, ApiSumResponse
-from d3.common.rpc.rpc_handlers import RpcHandlers
-from d3.common.rpc.rpc_send import RpcSend
-from d3.common.rpc.test_helpers.bad_api import ApiBadRequest
+from app.common.rpc.api_base import api_send_set
+from app.common.rpc.test_helpers.api_sum import ApiSumRequest, ApiSumResponse
+from app.common.rpc.rpc_handlers import RpcHandlers
+from app.common.rpc.rpc_send import RpcSend
+from app.common.rpc.test_helpers.bad_api import ApiBadRequest
 
 
 class MyTestCase(IsolatedAsyncioTestCase):

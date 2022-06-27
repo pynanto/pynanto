@@ -3,7 +3,7 @@ from typing import Callable, Awaitable
 
 from pydantic import BaseModel
 
-from d3.common.rpc.api_base import ApiBase
+from app.common.rpc.api_base import ApiBase
 
 
 class RpcSend:

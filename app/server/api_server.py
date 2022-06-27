@@ -1,5 +1,5 @@
-from d3.common.rpc.rpc_handlers import RpcHandlers
-from d3.server.api_handlers import handler_selection, handler_product
+from app.common.rpc.rpc_handlers import RpcHandlers
+from app.server.api_handlers import handler_product, handler_selection
 
 rpc_handlers = RpcHandlers()
 

@@ -1,10 +1,10 @@
 import json
 import unittest
 
-from d3.common.rpc.api_base import ApiBase
-from d3.common.rpc.test_helpers.api_sum import ApiSumRequest, ApiSumResponse
-from d3.common.rpc.rpc_handlers import RpcHandlers
-from d3.common.rpc.test_helpers.bad_api import wrong_handler
+from app.common.rpc.api_base import ApiBase
+from app.common.rpc.test_helpers.api_sum import ApiSumRequest, ApiSumResponse
+from app.common.rpc.rpc_handlers import RpcHandlers
+from app.common.rpc.test_helpers.bad_api import wrong_handler
 
 
 class MyTestCase(unittest.TestCase):

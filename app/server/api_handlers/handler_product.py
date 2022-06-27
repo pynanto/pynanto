@@ -1,4 +1,4 @@
-from d3.common.api.api_product import ApiProductRequest, ApiProductResponse
+from app.common.api.api_product import ApiProductRequest, ApiProductResponse
 
 
 def handle(req: ApiProductRequest) -> ApiProductResponse:

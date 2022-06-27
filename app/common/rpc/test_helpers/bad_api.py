@@ -1,4 +1,4 @@
-from d3.common.rpc.api_base import ApiBase
+from app.common.rpc.api_base import ApiBase
 
 
 class ApiBadRequest(ApiBase):

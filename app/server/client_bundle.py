@@ -1,20 +1,31 @@
 import os
 
 import zipfile
+from io import BytesIO, IOBase
 from pathlib import Path
 
 
-def build_archive() -> Path:
-    bundle_zip = Path("../client_bundle.zip").absolute()
-    if bundle_zip.exists():
-        bundle_zip.unlink()
-    zf = zipfile.ZipFile(bundle_zip, "w")
-    root = os.path.normpath(Path('../..').absolute())
+def build_archive(
+        root=os.path.normpath(Path('../..').absolute()),
+        folders=('/app/browser', '/app/common')
+) -> bytes:
+    stream = BytesIO()
+    zf = zipfile.ZipFile(stream, "w", compression=zipfile.ZIP_DEFLATED, compresslevel=1)
 
+    for folder in folders:
+        _add_folder(root, zf, folder)
+    zf.close()
+
+    stream.seek(0)
+    return stream.getbuffer().tobytes()
+
+
+def _add_folder(root, zf, folder):
     def fix_arcname(n: str):
         return 'additional' + n.removeprefix(root)
 
-    for dirname, subdirs, files in os.walk(root + '/app'):
+    w = root + folder
+    for dirname, subdirs, files in os.walk(w):
         remove_elements(subdirs, ['__pycache__'])
 
         dir_name = fix_arcname(dirname)
@@ -23,8 +34,6 @@ def build_archive() -> Path:
             file_path = os.path.join(dirname, filename)
             file_name = fix_arcname(file_path)
             zf.write(file_path, file_name)
-    zf.close()
-    return bundle_zip
 
 
 def _accept(filename):
@@ -36,4 +45,6 @@ def remove_elements(arr, to_remove):
 
 
 if __name__ == '__main__':
-    build_archive()
+    file = Path('../../client_bundle.zip').absolute()
+    file.unlink(missing_ok=True)
+    file.write_bytes(build_archive())

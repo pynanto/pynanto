@@ -23,9 +23,8 @@ def hello_world():
 
 @app.route("/client_bundle.zip")
 def client_bundle():
-    path = build_archive()
-    print('serving', path)
-    return path.read_bytes()
+    print('serving client_bundle.zip')
+    return build_archive()
 
 
 @app.route("/")

@@ -49,7 +49,9 @@ class RpcHandlers:
         return meta.handler(request)
 
     def dispatch_str(self, name: str, json_payload: str) -> str:
-        meta = self.handlers_meta[name]
+        meta = self.handlers_meta.get(name, None)
+        if meta is None:
+            raise Exception(f'No handler found under name `{name}`')
         args = json.loads(json_payload)
         request = meta.constructor(**args)
         response = meta.handler(request)

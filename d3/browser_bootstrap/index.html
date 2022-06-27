@@ -12,17 +12,19 @@
   <body>
     <py-script>
 # Run this using "asyncio"
-from pathlib import Path
 
+from pathlib import Path
 from pyodide.http import pyfetch
 
 
 response = await pyfetch('http://localhost:5020/client_bundle.zip')
 await response.unpack_archive()
+
 import sys
 sys.path.insert(0, str(Path('./additional').absolute()))
-import d3.browser
 
+import d3.browser as b
+await b.main()
 
 </py-script>
 

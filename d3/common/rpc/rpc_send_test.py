@@ -31,7 +31,7 @@ class MyTestCase(IsolatedAsyncioTestCase):
         server_handlers = RpcHandlers()
         server_handlers.register(handle_req)
 
-        def send_handler(name: str, json_payload: str) -> str:
+        async def send_handler(name: str, json_payload: str) -> str:
             # in production this will issue a js `fetch`
             return server_handlers.dispatch_str(name, json_payload)
 

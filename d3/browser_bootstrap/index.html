@@ -8,15 +8,23 @@
   </head>
   <py-env>
 - pydantic
-- paths:
-  - ./index.py
   </py-env>
   <body>
     <py-script>
 # Run this using "asyncio"
-import index
-await loop.run_until_complete(index.main())
-    </py-script>
+from pathlib import Path
+
+from pyodide.http import pyfetch
+
+
+response = await pyfetch('http://localhost:5020/client_bundle.zip')
+await response.unpack_archive()
+import sys
+sys.path.insert(0, str(Path('./additional').absolute()))
+import d3.browser
+
+
+</py-script>
 
   </body>
 </html>

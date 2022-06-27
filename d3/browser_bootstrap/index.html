@@ -17,7 +17,7 @@ from pathlib import Path
 from pyodide.http import pyfetch
 
 
-response = await pyfetch('http://localhost:5020/client_bundle.zip')
+response = await pyfetch('client_bundle.zip')
 await response.unpack_archive()
 
 import sys

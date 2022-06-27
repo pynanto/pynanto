@@ -1,6 +1,6 @@
 from pathlib import Path
 
-from flask import Flask, request
+from flask import Flask, request, send_file
 
 from d3.server.api_server import rpc_handlers
 from d3.server.client_bundle import build_archive
@@ -28,6 +28,11 @@ def client_bundle():
     path = build_archive()
     print('serving', path)
     return path.read_bytes()
+
+
+@app.route("/")
+def index_html():
+    return send_file('../browser_bootstrap/index.html')
 
 
 app.run(host="0.0.0.0", port=5020, debug=False, use_reloader=True)

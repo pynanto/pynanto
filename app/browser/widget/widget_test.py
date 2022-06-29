@@ -28,7 +28,7 @@ class WidgetTestCase(unittest.TestCase):
 
         target = Widget1()
         target.append_to(document.createElement('div'))
-        html = target.div1.container.innerHTML
+        html = target.container.innerHTML
         self.assertTrue("I'm WidgetSub" in html, f'Actual html=```{html}```')
 
 

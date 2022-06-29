@@ -51,6 +51,7 @@ class Widget:
                 def wc_binder(element):
                     instance: Widget = value.constructor()
                     instance._container = element
+                    c = instance.container  # force expand
                     return instance
 
                 return wc_binder

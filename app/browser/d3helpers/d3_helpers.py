@@ -1,6 +1,7 @@
 from typing import Tuple, TypeVar
 import d3
 
+from app.browser.html.dom_definitions import HTMLElement
 from app.common.app_geometry.size import Size
 
 Td3SelectionSvg = TypeVar('Td3SelectionSvg')  # d3.Selection<SVGSVGElement, any, any, any>

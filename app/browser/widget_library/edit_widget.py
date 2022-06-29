@@ -10,7 +10,6 @@ def element(f):
 
 
 class EditWidget(Widget):
-    # class EditWidget:
 
     def __init__(self, title: str = ''):
         super().__init__(  # language=HTML
@@ -20,10 +19,12 @@ class EditWidget(Widget):
             <br>
             """
         )
+        self.title = title
         self._input1: HTMLElement = self
         self._title: HTMLElement = self
-        self.bind_self_elements()
-        self._title.innerHTML = title
+
+    def after_render(self):
+        self._title.innerHTML = self.title
         self.oninput = lambda e: None
         self._input1.oninput = create_proxy(lambda e: self.oninput(e))
 

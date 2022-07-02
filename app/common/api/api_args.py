@@ -4,12 +4,10 @@ from typing import Tuple, Optional, List
 from app.common.rpc.api_base import ApiBase
 
 
-class ApiSelectionRequest(ApiBase):
-    window: Optional[Tuple[datetime, datetime]]
-
-
 class ApiSelectionResponse(ApiBase):
     timestamp_values: List[datetime]
 
 
-ApiSelectionRequest.response_type = ApiSelectionResponse
+class ApiSelectionRequest(ApiBase):
+    response_type = ApiSelectionResponse
+    window: Optional[Tuple[datetime, datetime]]

@@ -1,7 +1,7 @@
 import os
 
 import zipfile
-from io import BytesIO, IOBase
+from io import BytesIO
 from pathlib import Path
 
 

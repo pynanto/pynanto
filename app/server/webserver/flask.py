@@ -1,7 +1,7 @@
 from flask import Flask, request, send_file
 
-from app.server.api_server import rpc_handlers
-from app.server.client_bundle import build_archive
+from app.server.api_handlers.rpc_registrations import rpc_handlers
+from app.common.sources.client_bundle import build_archive
 
 app = Flask(__name__)
 
@@ -29,7 +29,8 @@ def client_bundle():
 
 @app.route("/")
 def index_html():
-    return send_file('../browser/index.html')
+    return send_file('../../browser/index.html')
 
 
-app.run(host="0.0.0.0", port=5020, debug=False, use_reloader=True)
+def start():
+    app.run(host="0.0.0.0", port=5020, debug=False, use_reloader=True)

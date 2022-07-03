@@ -29,7 +29,7 @@ def client_bundle():
 
 @app.route("/")
 def index_html():
-    return send_file('../browser_bootstrap/index.html')
+    return send_file('../browser/index.html')
 
 
 app.run(host="0.0.0.0", port=5020, debug=False, use_reloader=True)

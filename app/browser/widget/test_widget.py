@@ -1,9 +1,10 @@
 import unittest
 
 from app.browser.html.dom_definitions import HTMLElement
-from app.browser.unittest import unittest_main_fixed
+from app.browser.unittest_fix import unittest_main_fixed
 from app.browser.widget.widget import Widget
 from js import document, window, console, setInterval, fetch
+
 
 class WidgetTestCase(unittest.TestCase):
     def test_basic_bind(self):

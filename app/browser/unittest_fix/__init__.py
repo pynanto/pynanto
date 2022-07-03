@@ -14,9 +14,13 @@ def unittest_main_fixed(module_name):
 
 
 def run_all_tests():
+    script_dir = os.path.dirname(__file__)
+    # async tests seems to not be supported
+    # there are async tests in `common`
+    # so only test suite from  `browser` package
+    browser = (Path(script_dir) / '..').absolute()
+
     loader = unittest.TestLoader()
-    browser = Path('./additional/app/browser').absolute()
-    # (browser / '__init__.py').write_text('')
     test_suit = loader.discover(str(browser))
     _test_runner_run(test_suit)
 

@@ -14,5 +14,5 @@ async def main():
     # FilesystemTreeWidget().append_to(document.body)
     # ProductWidget().append_to(document.body)
     # test_widget.main()
-    from app.browser.unittest import run_all_tests
+    from app.browser.unittest_fix import run_all_tests
     run_all_tests()

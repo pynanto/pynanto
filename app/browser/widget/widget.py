@@ -17,7 +17,7 @@ class WidgetConstructor:
 class Widget:
     def __init__(self, html: str):
         self.html = html
-        self._expanded = False
+        self._widget_expanded = False
         self._container: HTMLElement = None
 
     def __call__(self, fun: Callable[[], T]) -> T:
@@ -28,8 +28,8 @@ class Widget:
         if self._container is None:
             self._container = document.createElement('div')
 
-        if not self._expanded:
-            self._expanded = True
+        if not self._widget_expanded:
+            self._widget_expanded = True
             self._container.innerHTML = self.html
             self.bind_self_elements()
             self.after_render()

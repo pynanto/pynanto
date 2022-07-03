@@ -9,10 +9,13 @@ from app.browser.widget_forms.product_widget import ProductWidget
 
 async def main():
     getcwd = os.getcwd()
-    console.log('cwd', getcwd)
     rpc_browser_setup()
-    # FilesystemTreeWidget().append_to(document.body)
-    # ProductWidget().append_to(document.body)
-    # test_widget.main()
+    FilesystemTreeWidget().append_to(document.body)
+    ProductWidget().append_to(document.body)
+
+    tests()
+
+
+def tests():
     from app.browser.unittest_fix import run_all_tests
     run_all_tests()

@@ -8,6 +8,8 @@ import js
 from js import document, console, setInterval
 from pyodide import create_proxy
 
+from app.browser.widget.widget import Widget
+
 console.log('=' * 40)
 
 
@@ -31,7 +33,6 @@ def filesystem_entity(name: str, indent=1):
             children.append(child_entity)
 
     if len(children) > 0:
-        console.log('ch', name, len(children))
         children_div = create_element('div', parent=container)
         children_div.style.marginLeft = f'{indent}em'
 
@@ -48,14 +49,12 @@ def filesystem_entity(name: str, indent=1):
     return container
 
 
-folder = (Path().home() / "additional").absolute()
-sys.path.insert(0, str(folder))
-print('sys.path', sys.path)
+class FilesystemTreeWidget(Widget):
+    def __init__(self, start_dir='/'):
+        super().__init__(  # language=HTML
+            ""
+        )
+        self.start_dir = start_dir
 
-folder.mkdir(parents=True, exist_ok=True)
-foo = folder / "foo.py"
-foo.write_text("print('I am foo2')")
-
-import foo
-
-document.body.append(filesystem_entity('/'))
+    def after_render(self):
+        self.container.append(filesystem_entity(self.start_dir))

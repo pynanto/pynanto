@@ -24,7 +24,7 @@ class Widget:
         return WidgetConstructor(fun)
 
     @property
-    def container(self):
+    def container(self) -> HTMLElement:
         if self._container is None:
             self._container = document.createElement('div')
 

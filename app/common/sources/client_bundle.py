@@ -4,9 +4,11 @@ import zipfile
 from io import BytesIO
 from pathlib import Path
 
+from app.core.strings import removeprefix
+
 
 def build_archive(
-        root=os.path.normpath(Path('../..').absolute()),
+        root: str = os.path.normpath(Path(__file__).parent / '../../..'),
         folders=('/app/browser', '/app/common')
 ) -> bytes:
     stream = BytesIO()
@@ -22,7 +24,7 @@ def build_archive(
 
 def _add_folder(root, zf, folder):
     def fix_arcname(n: str):
-        return 'additional' + n.removeprefix(root)
+        return 'additional' + removeprefix(n, root)
 
     w = root + folder
     for dirname, subdirs, files in os.walk(w):

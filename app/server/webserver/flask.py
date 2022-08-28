@@ -1,4 +1,4 @@
-from flask import Flask, request, send_file
+from flask import Flask, Response, request, send_file
 
 from app.server.api_handlers.rpc_registrations import rpc_handlers
 from app.common.sources.client_bundle import build_archive
@@ -23,8 +23,9 @@ def hello_world():
 
 @app.route("/client_bundle.zip")
 def client_bundle():
-    print('serving client_bundle.zip')
-    return build_archive()
+    print('serving client_bundle.zip with content-type')
+    return Response(build_archive(),
+                    mimetype='application/zip, application/octet-stream, application/x-zip-compressed, multipart/x-zip')
 
 
 @app.route("/")

@@ -4,7 +4,6 @@
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="default">
     <meta name="theme-color" content="#000000">
-    <meta name="name" content="PyScript/Panel KMeans Demo">
 
     <title>Pyscript/Panel KMeans Demo</title>
     <link rel="icon" type="image/x-icon" href="./favicon.png">
@@ -38,8 +37,6 @@
     <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"></script>
 
-    <link rel="stylesheet" href="https://pyscript.net/alpha/pyscript.css" />
-    <script defer src="https://pyscript.net/alpha/pyscript.js"></script>
   </head>
 <script type="importmap">
 {
@@ -48,14 +45,7 @@
   }
 }
 </script>
-  <py-env>
-- pydantic
-- altair
-- numpy
-- pandas
-- scikit-learn
-- panel==0.13.1
-  </py-env>
+
   <body>
   <div class="container-fluid d-flex flex-column vh-100 overflow-hidden" id="container">
       <nav class="navbar navbar-expand-md navbar-dark sticky-top shadow" id="header" style="background-color: #000000;">
@@ -86,7 +76,31 @@
       </div>
     </div>
 
-    <py-script>
+
+
+  </body>
+<script>
+    function load_pynanto() {
+        console.log('load_pynanto()...')
+        let s = document.createElement('script');
+        s.onload = () => {
+            console.log('pyodide load completed()')
+
+            async function main() {
+                let pyodide = await loadPyodide();
+                // await pyodide.loadPackage('pydantic');
+                await pyodide.loadPackage('micropip')
+                // await pyodide.loadPackage(['pydantic','numpy','pandas','scikit-learn']);
+                const micropip = pyodide.pyimport("micropip");
+                await micropip.install(['pydantic']);
+                // await micropip.install(['pydantic','altair','numpy','pandas','scikit-learn','panel==0.13.1']);
+
+                // Pyodide is now ready to use...
+                console.log(pyodide.runPythonAsync(`
+import sys
+print(f'sys.version={sys.version}')
+import pydantic
+print(f'pydantic={pydantic.__version__}')
 # Run this using "asyncio"
 
 from pathlib import Path
@@ -101,8 +115,14 @@ sys.path.insert(0, str(Path('./additional').absolute()))
 
 import app.browser.main as m
 await m.main()
+  `));
+            };
+            main();
+        };
+        s.src = 'https://cdn.jsdelivr.net/pyodide/v0.21.1/full/pyodide.js';
+        document.body.append(s);
+    }
 
-</py-script>
-
-  </body>
+    load_pynanto();
+</script>
 </html>

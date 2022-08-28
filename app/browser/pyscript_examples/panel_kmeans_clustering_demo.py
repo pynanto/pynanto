@@ -6,10 +6,6 @@ import js
 from pyodide import create_proxy
 
 
-def btn1_click(*args):
-        console.log('after_append()')
-        import app.browser.pyscript_examples.pyscript_example
-
 class PanelKMeansClusteringDemoWidget(Widget):
     def __init__(self):
         super().__init__(  # language=HTML
@@ -47,4 +43,11 @@ class PanelKMeansClusteringDemoWidget(Widget):
 
         load_next()
 
-        self._btn1.onclick = create_proxy(btn1_click)
+        self._btn1.onclick = create_proxy(self.btn1_click)
+
+    async def btn1_click(self, *args):
+        self._btn1.disabled = True
+        console.log('after_append()')
+        import micropip
+        await micropip.install(['altair', 'numpy', 'pandas', 'scikit-learn', 'panel==0.13.1'])
+        import app.browser.pyscript_examples.pyscript_example

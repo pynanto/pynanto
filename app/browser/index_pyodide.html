@@ -1,0 +1,58 @@
+<html lang="en">
+  <head>
+    <title>Rpc demo</title>
+    <meta charset="utf-8">
+    <link rel="icon" href="data:,">
+  </head>
+<script type="importmap">
+{
+  "imports": {
+    "d3": "https://cdn.skypack.dev/d3@7"
+  }
+}
+</script>
+
+  <body>
+
+  </body>
+<script>
+    function load_pynanto() {
+        console.log('load_pynanto()...')
+        let s = document.createElement('script');
+        s.onload = () => {
+            console.log('pyodide load completed()')
+
+            async function main() {
+                let pyodide = await loadPyodide();
+                await pyodide.loadPackage("pydantic");
+                // Pyodide is now ready to use...
+                console.log(pyodide.runPythonAsync(`
+import sys
+print(f'sys.version={sys.version}')
+import pydantic
+print(f'pydantic={pydantic.__version__}')
+# Run this using "asyncio"
+
+from pathlib import Path
+from pyodide.http import pyfetch
+
+
+response = await pyfetch('client_bundle.zip')
+await response.unpack_archive()
+
+import sys
+sys.path.insert(0, str(Path('./additional').absolute()))
+
+import app.browser.main as m
+await m.main()
+  `));
+            };
+            main();
+        };
+        s.src = 'https://cdn.jsdelivr.net/pyodide/v0.21.1/full/pyodide.js';
+        document.body.append(s);
+    }
+
+    load_pynanto();
+</script>
+</html>

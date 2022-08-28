@@ -14,10 +14,10 @@ async def main():
     rpc_browser_setup()
 
     widget_instances = [
-        # PanelKMeansClusteringDemoWidget(),
-        FilesystemTreeWidget(),
-        ProductWidget(),
-        SquareWidget(),
+        PanelKMeansClusteringDemoWidget(),
+        # FilesystemTreeWidget(),
+        # ProductWidget(),
+        # SquareWidget(),
         # SquareWidget(),
     ]
 

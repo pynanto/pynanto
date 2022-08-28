@@ -1,10 +1,10 @@
+print('='*50 + ' starting of pyscript_example')
 import altair as alt
 import panel as pn
 import pandas as pd
 
 from sklearn.cluster import KMeans
 from pyodide.http import open_url
-
 pn.config.sizing_mode = 'stretch_width'
 
 url = 'https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2020/2020-07-28/penguins.csv'
@@ -80,3 +80,4 @@ def update_filters(event=None):
 
 update_table()
 update_chart()
+print('='*50 + ' end of pyscript_example')

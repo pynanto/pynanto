@@ -1,5 +1,8 @@
-from js import document
+import asyncio
 
+from js import document, console
+
+from app.browser.html.dom_async import run_async
 from app.browser.pyscript_examples.d3js_demo.d3js_demo_widget import D3_DemoWidget
 from app.browser.rpc import global_transport_set_url
 from app.browser.use_case_01.use_case_01_widget import UseCase01Widget

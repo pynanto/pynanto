@@ -126,4 +126,5 @@ class PanelKMeansClusteringDemoWidget(Widget):
         console.log('after_append()')
         import micropip
         await micropip.install(['altair', 'numpy', 'pandas', 'scikit-learn', 'panel==0.13.1'])
-        import app.browser.pyscript_examples.pyscript_example
+        import app.browser.pyscript_examples.panel_kmeans.pyscript_example as ex
+        anti_removal = ex.url

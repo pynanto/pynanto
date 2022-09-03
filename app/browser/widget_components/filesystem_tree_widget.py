@@ -3,7 +3,7 @@ import os
 from pathlib import Path
 
 from js import console
-from pyodide import create_proxy
+from pyodide.ffi import create_proxy
 
 from app.browser.html.dom_definitions import HTMLElement
 from app.browser.html.dom_helpers import download_file

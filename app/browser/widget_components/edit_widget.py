@@ -1,7 +1,7 @@
 # from app.browser import Widget
 from app.browser.html.dom_definitions import HTMLElement
 from app.browser.widget.widget import Widget
-from pyodide import create_proxy, to_js
+from pyodide.ffi import create_proxy, to_js
 from js import console
 
 

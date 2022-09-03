@@ -3,7 +3,7 @@ from app.browser.html.html_helpers import script
 from app.browser.widget.widget import Widget
 from js import document, console
 import js
-from pyodide import create_proxy
+from pyodide.ffi import create_proxy
 
 
 class PanelKMeansClusteringDemoWidget(Widget):

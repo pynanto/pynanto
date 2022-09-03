@@ -1,7 +1,7 @@
 import asyncio
 
 from js import document, console
-from pyodide import create_proxy
+from pyodide.ffi import create_proxy
 import js
 
 

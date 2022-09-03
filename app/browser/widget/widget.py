@@ -5,7 +5,7 @@ from typing import TypeVar, Callable
 
 from js import document, window, console, setInterval, fetch
 import abc
-from pyodide import create_proxy
+from pyodide.ffi import create_proxy
 
 from app.browser.html.dom_definitions import HTMLElement
 

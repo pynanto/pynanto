@@ -9,7 +9,6 @@ from app.browser.widget_forms.square_widget import SquareWidget
 
 async def main():
 
-    return
     global_transport_set_url('http://localhost:5020/api_handler?name={api_name}')
 
     widget_instances = [

@@ -1,6 +1,7 @@
 from pyodide import create_proxy, to_js
-import d3
-from js import document, console
+# import d3
+
+from js import document, console, d3
 
 from app.browser.d3helpers.d3_helpers import newD3Group
 
@@ -37,7 +38,7 @@ svgorig = (py
            .attr("width", "400")
            .attr("height", "400"))
 
-svg = newD3Group(svgorig, (100, 200))
+svg = newD3Group(svgorig, (0, 0))
 
 for d in data:
     d_py = d.to_py()

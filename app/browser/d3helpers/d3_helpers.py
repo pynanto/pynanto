@@ -1,5 +1,5 @@
 from typing import Tuple, TypeVar
-import d3
+from js import d3
 
 from app.browser.html.dom_definitions import HTMLElement
 from app.common.app_geometry.size import Size

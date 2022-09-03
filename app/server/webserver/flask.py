@@ -1,3 +1,5 @@
+from pathlib import Path
+
 from flask import Flask, Response, request, send_file
 
 from app.server.api_handlers.rpc_registrations import rpc_handlers
@@ -31,6 +33,12 @@ def client_bundle():
 @app.route("/")
 def index_html():
     return send_file('../../browser/index.html')
+
+
+@app.route("/pynanto_starter.js")
+def bootstrap_js():
+    return Response((Path(__file__).parent / '../bootstrap/pynanto_starter.js').read_text(),
+                    mimetype='text/javascript')
 
 
 def start():

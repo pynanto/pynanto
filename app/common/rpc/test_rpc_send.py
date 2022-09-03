@@ -3,7 +3,7 @@ from unittest import IsolatedAsyncioTestCase
 
 from pydantic import BaseModel
 
-from app.common.rpc.api_base import api_send_set
+from app.common.rpc.api_base import global_transport_set
 from app.common.rpc.test_helpers.api_sum import ApiSumRequest, ApiSumResponse
 from app.common.rpc.rpc_handlers import RpcHandlers
 from app.common.rpc.rpc_send import RpcSend
@@ -19,7 +19,7 @@ class MyTestCase(IsolatedAsyncioTestCase):
         def handle_req(req: ApiSumRequest):
             return ApiSumResponse(sum=req.a + req.b)
 
-        api_send_set(send)
+        global_transport_set(send)
         req = ApiSumRequest(a=39, b=3)
         res: ApiSumResponse = await req.send()
         self.assertEqual(42, res.sum)
@@ -37,7 +37,7 @@ class MyTestCase(IsolatedAsyncioTestCase):
 
         sender = RpcSend(send_handler)
 
-        api_send_set(sender.send)
+        global_transport_set(sender.send)
 
         req = ApiSumRequest(a=39, b=3)
         res: ApiSumResponse = await req.send()

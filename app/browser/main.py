@@ -1,24 +1,22 @@
 from js import document
 
-from app.browser.pyscript_examples.d3js_demo.d3js_demo_widget import D3_DemoWidget
-from app.browser.pyscript_examples.panel_kmeans.panel_kmeans_clustering_demo import PanelKMeansClusteringDemoWidget
-from app.browser.rpc import rpc_browser_setup
-from app.browser.widget_forms.future_widget import FutureWidget
-from app.browser.widget_forms.request_widget import RequestWidget
+from app.browser.rpc import global_transport_set_url
+from app.browser.widget_forms.product_widget import ProductWidget
+from app.browser.widget_forms.square_widget import SquareWidget
 
 
 async def main():
 
-    rpc_browser_setup()
+    global_transport_set_url('http://localhost:5020/api_handler?name={api_name}')
 
     widget_instances = [
         # PanelKMeansClusteringDemoWidget(),
         # FutureWidget(),
         # D3_DemoWidget(),
-        RequestWidget(),
+        # RequestWidget(),
         # FilesystemTreeWidget(),
-        # ProductWidget(),
-        # SquareWidget(),
+        ProductWidget(),
+        SquareWidget(),
         # SquareWidget(),
     ]
 

@@ -7,8 +7,10 @@ class ApiBase(BaseModel):
     class Config:
         validate_assignment = True
 
-    async def send(self):
-        return await api_send(self)
+    async def send(self, transport: 'ApiTransportType' = None):
+        if transport is None:
+            transport = _global_transport
+        return await transport(self)
 
     @classmethod
     def check_request_completeness(cls, request_type):
@@ -22,10 +24,10 @@ async def _no_send(request):
     raise Exception('no send was configured. Use `api_send_set(...)`.')
 
 
-ApiSendType = Callable[[ApiBase], Awaitable[BaseModel]]
-api_send: ApiSendType = _no_send
+ApiTransportType = Callable[[ApiBase], Awaitable[BaseModel]]
+_global_transport: ApiTransportType = _no_send
 
 
-def api_send_set(send: ApiSendType):
-    global api_send
-    api_send = send
+def global_transport_set(send: ApiTransportType):
+    global _global_transport
+    _global_transport = send

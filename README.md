@@ -37,6 +37,15 @@ RPC mechanism
 ## 5) Provide Python helpers to deal with html/dom/javascript
 Widget(s) and HTML stubs
 
+# Pynanto lifecycle
+
+- Configure a web server to serve 
+  - client_bundle.zip, this contains the Python sources we want to send to the client
+  - index.html, optional you can inject your html
+  - pynanto_starter.js
+  - rpc handlers
+- 
+
 # Impedance breaker projects
 These are other projects that allow the developer to use the same language also in the browser. 
 We can think of the following:

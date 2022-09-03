@@ -1,8 +1,11 @@
-from pyodide import create_proxy, to_js
+from pyodide.ffi import create_proxy, to_js
 # import d3
 
 from js import document, console, d3
 
+console.log('d3 version', d3.version)
+if len(d3.version) < 3:
+    raise Exception('d3 is not properly loaded')
 from app.browser.d3helpers.d3_helpers import newD3Group
 
 fruits = [

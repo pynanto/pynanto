@@ -1,8 +1,11 @@
+import inspect
 from functools import cache
+from types import SimpleNamespace
 from typing import TypeVar, Callable
 
 from js import document, window, console, setInterval, fetch
 import abc
+from pyodide import create_proxy
 
 from app.browser.html.dom_definitions import HTMLElement
 
@@ -32,6 +35,7 @@ class Widget:
             self._widget_expanded = True
             self._container.innerHTML = self.html
             self.bind_self_elements()
+            self._bind_events()
             self.after_render()
 
         return self._container
@@ -67,3 +71,25 @@ class Widget:
                 raise Exception(f'Element not found, name:[{key}] html: [{self.html}]')
             instance = binder(element)
             self.__dict__[key] = instance
+
+    def _bind_events(self):
+
+        members = inspect.getmembers(self)
+
+        for name, method in members:
+            parts = name.split('__')
+            if len(parts) != 2:
+                continue
+
+            element_name = parts[0]
+            event_name = parts[1]
+            if element_name == '' or event_name == '':
+                continue
+
+            element = self.container.querySelector('#' + element_name)
+            if element is None:
+                console.warn(f'Event bind failed, element `{element_name}` was not found for method `{name}`')
+                continue
+
+            m = getattr(self, name)
+            element.addEventListener(event_name, create_proxy(m))

@@ -1,5 +1,6 @@
 import unittest
 
+from app.browser.html.dom_async import load_script, run_async
 from app.browser.html.dom_definitions import HTMLElement
 from app.browser.unittest_fix import unittest_main_fixed
 from app.browser.widget.widget import Widget
@@ -31,6 +32,21 @@ class WidgetTestCase(unittest.TestCase):
         target.append_to(document.createElement('div'))
         html = target.container.innerHTML
         self.assertTrue("I'm WidgetSub" in html, f'Actual html=```{html}```')
+
+    def test_bind_events(self):
+        actual = []
+
+        class Widget1(Widget):
+            def __init__(self):
+                super().__init__("<button id='foo'>foo</button>")
+
+            def foo__click(self, *args):
+                actual.append(1)
+
+        target = Widget1()
+        foo = target.container.querySelector('#foo')
+        foo.click()
+        self.assertEqual([1], actual)
 
 
 def main():

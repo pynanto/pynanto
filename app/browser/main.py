@@ -1,12 +1,15 @@
 from js import document
 
+from app.browser.pyscript_examples.d3js_demo.d3js_demo_widget import D3_DemoWidget
 from app.browser.rpc import global_transport_set_url
-from app.browser.widget_forms.product_widget import ProductWidget
+from app.browser.use_case_01.use_case_01_widget import UseCase01Widget
+from app.browser.usecase02.UseCase02_Widget import UseCase02_Widget
 from app.browser.widget_forms.square_widget import SquareWidget
 
 
 async def main():
 
+    return
     global_transport_set_url('http://localhost:5020/api_handler?name={api_name}')
 
     widget_instances = [
@@ -15,8 +18,9 @@ async def main():
         # D3_DemoWidget(),
         # RequestWidget(),
         # FilesystemTreeWidget(),
-        ProductWidget(),
-        SquareWidget(),
+        # ProductWidget(),
+        UseCase02_Widget(),
+        D3_DemoWidget(),
         # SquareWidget(),
     ]
 

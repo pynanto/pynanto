@@ -1,3 +1,4 @@
+from app.browser.d3helpers.d3_load import load_d3
 from app.browser.html.dom_async import run_async, load_script
 from app.browser.widget.widget import Widget
 from js import console
@@ -8,7 +9,7 @@ class D3_DemoWidget(Widget):
         super().__init__(  # language=HTML
             """
          <div>
-          <h2>PyScript version</h2>
+          <h2>D3_DemoWidget</h2>
           <div id="py">
             <div class="loading"></div>
           </div>
@@ -18,7 +19,8 @@ class D3_DemoWidget(Widget):
 
     def after_render(self):
         async def doit():
-            await load_script(src='https://d3js.org/d3.v7.min.js')
+            await load_d3()
+            console.log('pre import')
             import app.browser.pyscript_examples.d3js_demo.app_d3 as ex
             console.log(ex.__name__)
 

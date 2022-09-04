@@ -1,7 +1,22 @@
 from typing import TypeVar, List
 
 
-class HTMLElement:
+class Event:
+    pass
+
+
+class EventTarget:
+    def addEventListener(self, type: str, callback, options=None):
+        pass
+
+    def dispatchEvent(self, event: Event) -> bool:
+        pass
+
+    def removeEventListener(self, type: str, callback, options=None):
+        pass
+
+
+class HTMLElement(EventTarget):
     innerHTML: str
     innerText: str
     outerHTML: str

@@ -24,12 +24,12 @@ class RequestWidget(Widget):
 <div>
     <label>Body</label>
     <br>
-    <textarea id='ed2' style='font-size: 0.7em' cols='30' rows='3'></textarea>
+    <textarea id='ed2' style='font-size: 0.7em' cols='60' rows='15' wrap="off"></textarea>
     <br>
     <button id="btn_post">Issue request POST</button>   
 </div>
 <br>
-<textarea id="taLog" style='font-size: 0.7em' cols='120' rows='40'></textarea>
+<textarea id="taLog" style='font-size: 0.7em' cols='120' rows='40' wrap="off"></textarea>
 <button id="btn_pretty">JSON prettify</button>
 <br>
 """

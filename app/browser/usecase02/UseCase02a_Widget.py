@@ -1,5 +1,7 @@
 import json
+from itertools import groupby
 from pathlib import Path
+from typing import Dict
 
 from app.browser.d3helpers.d3_helpers import newD3Group
 from app.browser.d3helpers.d3_load import load_d3
@@ -10,8 +12,10 @@ from app.browser.widget.widget import Widget
 from js import d3, console
 from pyodide.ffi import create_proxy, to_js
 
+from app.common.itertools import associateby
 from app.common.time import time_wrapper
-from app.common.use_case_01.datachart_args import ApiDatachartCsvDataResponse
+from app.common.use_case_01.datachart_args import ApiDatachartCsvDataResponse, ApiDatachartCsvInfoResponse, \
+    ColumnValues, ValueColumn
 
 
 class UseCase02a_Widget(Widget):
@@ -34,9 +38,17 @@ class UseCase02a_Widget(Widget):
 
     @time_wrapper()
     def after_render_async2(self):
-        text = (Path(__file__).parent / 'data.json').read_text()
-        args = json.loads(text)
-        resp = ApiDatachartCsvDataResponse(**args)
+        data: ApiDatachartCsvDataResponse = json_to_instance(ApiDatachartCsvDataResponse, 'data.json')
+        data_dict = associateby(data.column_values, lambda c: c.name)
+        info: ApiDatachartCsvInfoResponse = json_to_instance(ApiDatachartCsvInfoResponse, 'info.json')
+        columns: Dict[str, ValueColumn] = {}
+        for col in info.columns:
+            vals: ColumnValues = data_dict.get(col.name, None)
+            if vals is not None:
+                colval = ValueColumn(values=vals.values, **vars(col))
+                columns[col.name] = colval
+                console.log('='*30 + col.name)
+
 
         gBrush = newD3Group(d3.select(self.root))
         brush = d3.brushX().on("end", create_proxy(self.on_brush_end))
@@ -54,3 +66,10 @@ class UseCase02a_Widget(Widget):
         start = selection[0]
         end = selection[1]
         console.log(start + 1, end + 2)
+
+
+def json_to_instance(response, data_json):
+    text = (Path(__file__).parent / data_json).read_text()
+    args = json.loads(text)
+    resp = response(**args)
+    return resp

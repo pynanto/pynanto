@@ -1,4 +1,5 @@
 import asyncio
+import traceback
 
 from js import document, console
 from pyodide.ffi import create_proxy
@@ -15,5 +16,11 @@ async def load_script(src: str):
     console.log('await is', res)
 
 
-def run_async(*args):
-    asyncio.get_event_loop().run_until_complete(*args)
+def run_async(future):
+    async def display_exceptions():
+        try:
+            await future
+        except Exception:
+            console.error(traceback.format_exc())
+
+    asyncio.get_event_loop().run_until_complete(display_exceptions())

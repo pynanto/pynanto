@@ -41,7 +41,7 @@ class FutureWidget(Widget):
 
         async def doit():
             console.log('btn_click doit() start')
-            await load_script(src='https://d3js.org/d3.v7.min.js')
+            await load_script(src=self.ed1.value)
             console.log('btn_click doit() end')
 
         run_async(doit())

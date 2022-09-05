@@ -22,10 +22,10 @@ class EditWidget(Widget):
         self.title = title
         self._input1: HTMLElement = self
         self._title: HTMLElement = self
+        self.oninput = lambda e: None
 
     def after_render(self):
         self._title.innerHTML = self.title
-        self.oninput = lambda e: None
         self._input1.oninput = create_proxy(lambda e: self.oninput(e))
 
     @property

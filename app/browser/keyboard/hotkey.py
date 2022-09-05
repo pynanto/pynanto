@@ -18,7 +18,6 @@ class Hotkey:
         self.handlers[hotkey] = handler
 
     def _detect_hotkey(self, e):
-        console.log(e)
         key = ''
         if e.ctrlKey: key += 'CTRL-'
         if e.shiftKey: key += 'SHIFT-'

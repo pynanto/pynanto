@@ -26,7 +26,7 @@ class UseCase02_Widget(Widget):
 
     def after_render(self):
         hk = Hotkey(self.container)
-        hk.enable_log = True
+        # hk.enable_log = True
         hk.add('CTRL-ALT-R', self._hotkey_callback)
         hk.add('E', self._hotkey_callback2)
         run_async(self.after_render_async2())

@@ -3,6 +3,7 @@ from js import document
 from app.browser.d3helpers.d3_load import load_d3
 from app.browser.rpc import global_transport_set_url
 from app.browser.widget_components.filesystem_tree_widget import FilesystemTreeWidget
+from app.browser.widget_forms.future_widget import FutureWidget
 from app.browser.widget_forms.product_widget import ProductWidget
 
 from app.browser.widget_forms.request_widget import RequestWidget
@@ -16,12 +17,12 @@ async def main():
     from app.browser.usecase02.UseCase02a_Widget import UseCase02a_Widget
     widget_instances = [
         # PanelKMeansClusteringDemoWidget(),
-        # FutureWidget(),
-        D3_DemoWidget(),
+        FutureWidget(),
+        # D3_DemoWidget(),
         # RequestWidget(),
-        FilesystemTreeWidget(),
-        ProductWidget(),
-        UseCase02a_Widget(),
+        # FilesystemTreeWidget(),
+        # ProductWidget(),
+        # UseCase02a_Widget(),
         # D3_DemoWidget(),
         # SquareWidget(),
     ]

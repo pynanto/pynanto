@@ -12,7 +12,7 @@ async def load_script(src: str):
     s.onload = create_proxy(lambda x: f.set_result('ok'))
     document.body.append(s)
     res = await f
-    # console.log('await is', res)
+    console.log('await is', res)
 
 
 def run_async(*args):

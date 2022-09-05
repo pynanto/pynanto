@@ -39,7 +39,7 @@ def _add_folder(root, zf, folder):
 
 
 def _accept(filename):
-    return filename.endswith('.py') or filename.endswith('.html')
+    return True  # filename.endswith('.py') or filename.endswith('.html')
 
 
 def remove_elements(arr, to_remove):

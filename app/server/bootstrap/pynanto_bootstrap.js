@@ -1,3 +1,6 @@
+if (typeof pyodide_src_url === 'undefined')
+    pyodide_src_url = 'https://cdn.jsdelivr.net/pyodide/v0.21.2/full/pyodide.js'
+
 async function main() {
     if (typeof loadPyodide === 'undefined') {
         async function load_script(src) {
@@ -10,7 +13,7 @@ async function main() {
             await promise;
         }
 
-        await load_script('https://cdn.jsdelivr.net/pyodide/v0.21.2/full/pyodide.js');
+        await load_script(pyodide_src_url);
     }
     let pyodide = await loadPyodide();
     await pyodide.loadPackage('micropip')

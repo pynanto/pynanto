@@ -17,11 +17,11 @@ async def main():
     from app.browser.usecase02.UseCase02a_Widget import UseCase02a_Widget
     widget_instances = [
         # PanelKMeansClusteringDemoWidget(),
-        FutureWidget(),
+        # FutureWidget(),
         # D3_DemoWidget(),
         # RequestWidget(),
-        # FilesystemTreeWidget(),
-        # ProductWidget(),
+        FilesystemTreeWidget(),
+        ProductWidget(),
         # UseCase02a_Widget(),
         # D3_DemoWidget(),
         # SquareWidget(),

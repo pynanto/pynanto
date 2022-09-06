@@ -35,9 +35,9 @@ def index_html():
     return send_file('../../browser/index.html')
 
 
-@app.route("/pynanto_starter.js")
+@app.route("/pynanto_bootstrap.js")
 def bootstrap_js():
-    return Response((Path(__file__).parent / '../bootstrap/pynanto_starter.js').read_text(),
+    return Response((Path(__file__).parent / '../bootstrap/pynanto_bootstrap.js').read_text(),
                     mimetype='text/javascript')
 
 

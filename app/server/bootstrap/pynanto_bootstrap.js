@@ -1,19 +1,24 @@
 async function main() {
+    if (typeof loadPyodide === 'undefined') {
+        async function load_script(src) {
+            let script = document.createElement('script');
+            script.src = src;
+            let resolve = '';
+            let promise = new Promise(r => resolve = r);
+            script.onload = () => resolve();
+            document.body.append(script)
+            await promise;
+        }
+
+        await load_script('https://cdn.jsdelivr.net/pyodide/v0.21.2/full/pyodide.js');
+    }
     let pyodide = await loadPyodide();
-    // await pyodide.loadPackage('pydantic');
     await pyodide.loadPackage('micropip')
-    // await pyodide.loadPackage(['pydantic','numpy','pandas','scikit-learn']);
     const micropip = pyodide.pyimport("micropip");
     await micropip.install(['pydantic']);
-    // await micropip.install(['pydantic','altair','numpy','pandas','scikit-learn','panel==0.13.1']);
-
-    // Pyodide is now ready to use...
     pyodide.runPythonAsync(`
 import sys
-print(f'sys.version={sys.version}')
 import pydantic
-print(f'pydantic={pydantic.__version__}')
-# Run this using "asyncio"
 
 from pathlib import Path
 from pyodide.http import pyfetch
@@ -22,7 +27,6 @@ from pyodide.http import pyfetch
 response = await pyfetch('client_bundle.zip')
 await response.unpack_archive()
 
-import sys
 sys.path.insert(0, str(Path('./additional').absolute()))
 
 import app.browser.main as m
